@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMOOR</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .hero-container {
+      display: flex;
+      min-height: 100vh;
+      background: url('364d8d8e-449f-4146-a1b0-77828f2791c8.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .custom-navbar {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      padding: 10px 25px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      z-index: 10;
+    }
+
+    .custom-navbar a {
+      text-decoration: none;
+      color: #f3e8d1;
+      font-weight: 500;
+    }
+
+    .custom-navbar .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .custom-navbar .btn-book {
+      background: #f3e8d1;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 8px;
+    }
+
+    .hero-text {
+      flex: 2;
+      padding: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: #f3e8d1;
+      line-height: 1.1;
+      z-index: 2;
+      position: relative;
+    }
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3; /* Adjust for subtle overlay */
+  pointer-events: none;
+}
+
+
+
+    .hero-text .social-icons {
+      z-index: 2;
+      position: relative;
+      margin-top: 40px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .hero-sidebar {
+      flex: 1;
+      padding: 45px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .sidebar-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .sidebar-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.8);
+    }
+
+    .sidebar-card .card-text-overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #f3e8d1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .sidebar-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sidebar-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  filter: brightness(0.8);
+  transition: transform 0.4s ease-in-out;
+}
+
+.sidebar-card:hover img {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.sidebar-card .card-text-overlay {
+  z-index: 2;
+  position: absolute;
+}
+
+
+.best-sellers {
+  background: #0f0f0f;
+  padding: 60px 30px;
+  font-family: 'playfair display', sans-serif;
+  color: #f3e8d1;
+  
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-behavior: smooth;
+  padding: 10px 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+
+.product-card {
+  flex: 0 0 auto;
+  background: #86848026;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 260px;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s;
+  font-family:"playfair display", serif;
+}
+
+.product-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.product-card h5 {
+  margin-top: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f3e8d1;
+}
+
+.product-card p {
+  font-size: 1rem;
+  color: #f3e8d1be;
+}
+
+.scroll-btn {
+  background-color: #f3e8d1;
+  border: none;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.contact-section {
+  background-color: #0f0f0f;
+  color: #f3e8d1;
+  font-family: 'Playfair Display', serif;
+  padding: 80px 40px;
+  padding-bottom: 10px;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.contact-left {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-left h2 {
+  font-size: 3.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.contact-left img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-info h4 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contact-socials a {
+  margin-right: 15px;
+  font-size: 1.2rem;
+  color: #f3e8d1;
+  transition: color 0.3s;
+}
+
+.contact-socials a:hover {
+  color: #e0c187;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 12px;
+}
+
+.contact-timings {
+  margin-top: 30px;
+  text-align: left;
+  background: #1b1b1b;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+
+.contact-timings h5 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #e0c187;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.contact-timings ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-timings li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #f3e8d1;
+}
+
+.testimonial-section {
+  background-color: #111;
+  color: #f3e8d1;
+  padding: 80px 30px;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+.testimonial-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #e0c187;
+}
+
+.testimonial-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.testimonial-card {
+  background-color: #1a1a1a;
+  padding: 30px 25px;
+  border-radius: 20px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 238, 200, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 238, 200, 0.2);
+}
+
+.testimonial-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #e0c187;
+  margin-bottom: 15px;
+}
+
+.testimonial-card h5 {
+  font-size: 1.1rem;
+  margin: 10px 0 4px;
+  font-weight: 600;
+}
+
+.testimonial-card .title {
+  font-size: 0.9rem;
+  color: #c9bfb3;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.testimonial-card .review {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* =================== RESPONSIVE STYLES =================== */
+
+/* Tablets (768px and down) */
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column;
+    padding-top: 100px;
+  }
+
+  .hero-text {
+    padding: 100px 20px 30px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 8vh;
+  }
+
+  .hero-text p {
+    font-size: 2.5vh;
+  }
+
+  .hero-sidebar {
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .sidebar-card {
+    width: 45%;
+  }
+
+  .product-card {
+    width: 220px;
+  }
+
+  .testimonial-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Phones (max-width: 576px) */
+@media (max-width: 576px) {
+  .custom-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .custom-navbar a,
+  .custom-navbar .btn-book {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+
+  .hero-text h1 {
+    font-size: 6vh;
+  }
+
+  .hero-text p {
+    font-size: 2vh;
+  }
+
+  .sidebar-card {
+    width: 100%;
+  }
+
+  .carousel-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scroll-btn {
+    display: none;
+  }
+
+  .product-card {
+    width: 85%;
+  }
+
+  .testimonial-card {
+    max-width: 90%;
+  }
+
+  .contact-left h2 {
+    font-size: 2rem;
+  }
+
+  .contact-map iframe {
+    height: 150px;
+  }
+
+  .contact-timings {
+    max-width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<div class="hero-container">
+
+  <!-- Navbar -->
+  <div class="custom-navbar">
+    <div class="brand"><a href="index.html" style="color: #f3e8d1;font-family: 'Playfair Display', serif;">SMOOR</a></div>
+    <a href="menu.html" style="color: #f3e8d1;font-family: 'Playfair Display', serif;">MENU</a>
+    <a href="about.html" style="color: #f3e8d1;font-family: 'Playfair Display', serif;">ABOUT</a>
+    <a href="about.html#contact" style="color: #f3e8d1;font-family: 'Playfair Display', serif;">CONTACTS</a>
+<a href="reserve.html"><button class="btn-book"  style="background-color: #303030; color:#f3e8d1; font-family:'Playfair Display', serif;">BOOK A TABLE</button></a>
+  </div>
+
+  <!-- Left Content with YouTube Video Background -->
+  <div class="hero-text">
+    <!-- YouTube Video Background -->
+    <div class="video-bg">
+      <div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="SMOOR S Diwali  Hamper.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+    </div>
+
+    <!-- Text Overlay -->
+    <h1 style="font-size: 20vh;">SMOOR</h1>
+    <p style="font-size: 3.5vh;font-family: 'Playfair Display', serif;">Crafted. Celebrated. Counted.</p>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/smoorchocolates/?hl=en"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.facebook.com/smoorchocolates"><i class="bi bi-facebook"></i></a>
+      <a href="https://x.com/smoorchocolates?lang=en"><i class="bi bi-twitter"></i></a>
+    </div>
+  </div>
+
+  <!-- Right Sidebar -->
+  <!-- Hero Right Sidebar with Overlay -->
+<div class="hero-sidebar">
+  <div class="sidebar-card"><a href="menu.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8f_dkw5Fb9ky8mpx9Ns8MiHbIzK1Pw2pdsRDU1mGH6MJiiQznaS6YWvZEbHFI0bSLkXI&usqp=CAU" alt="Menu">
+    <div class="card-overlay"></div>
+    <div class="card-text-overlay">MENU →</div>
+  </div></a>
+  <div class="sidebar-card"><a href="reserve.html">
+    <img src="https://platform.la.eater.com/wp-content/uploads/sites/26/chorus/uploads/chorus_asset/file/7656135/commerson_PR.jpg?quality=90&strip=all&crop=0.012500000000003,0,99.975,100" alt="Reservation">
+    <div class="card-overlay"></div>
+    <div class="card-text-overlay">RESERVATION →</div>
+  </div></a>
+  <div class="sidebar-card"><a href="about.html">
+    <img src="https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/sites/2/2016/09/Smoor-4-i.jpg" alt="Our Restaurant">
+    <div class="card-overlay"></div>
+    <div class="card-text-overlay">OUR RESTAURANT →</div>
+  </div></a>
+</div>
+</div>
+
+<section class="best-sellers">
+  <h2 class="text-center mb-4" style="padding: 10vh; font-size: 45px;">BEST SELLERS</h2>
+  <div class="carousel-wrapper">
+    <button class="scroll-btn left" onclick="scrollCarousel(-1)">&#10094;</button>
+
+    <div class="carousel-track" id="product-carousel">
+      <div class="product-card">
+  <img src="data:image/jpeg;base64,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" alt="Product 1">
+  <div class="product-info">
+    <h5>CELEBRATION PACK OF 16</h5>
+    <p>₹699.00</p>
+  </div>
+</div>
+
+      <div class="product-card">
+        <img src="https://foara.in/wp-content/uploads/2024/05/2299.jpg" alt="Product 2">
+        <h5>ASSORTED CHOCO TRUFFLE BOX 16</h5>
+        <p>₹599.00</p>
+      </div>
+      <div class="product-card">
+        <img src="https://amintiri.in/cdn/shop/products/dark-chocolate-truffle_8442ada7-e682-493a-8226-4e1cfefc2925.jpg?v=1613118672" alt="Product 3">
+        <h5>Belgium Chocolate Truffle (Eggless) - 1Kg</h5>
+        <p>₹1,828.00</p>
+      </div>
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/515CTMpuzeL.jpg" alt="Product 4">
+        <h5>True Classics 72% Extra Dark</h5>
+        <p>₹140.00</p>
+      </div>
+      <div class="product-card">
+        <img src="https://dt4l9bx31tioh.cloudfront.net/eazymedia/eazytrendz/4909/trend20250704060836.jpg?width=750&height=436&mode=crop" alt="Product 4">
+        <h5>Dark Chocolate Café</h5>
+        <p>₹200.00</p>
+      </div>
+      <div class="product-card">
+        <img src="https://homemadehooplah.com/wp-content/uploads/2021/09/spiced-hot-chocolate-1.jpg" alt="Product 4">
+        <h5>Spiced Hot Chocolate</h5>
+        <p>₹120.00</p>
+      </div>
+      <div class="product-card">
+        <img src="https://ichef.bbc.co.uk/ace/standard/1600/food/recipes/rainbow_cake_20402_16x9.jpg.webp" alt="Product 4">
+        <h5>Rainbow Cake</h5>
+        <p>₹2200.00</p>
+      </div>
+      <!-- ➕ Add more cards as needed -->
+    </div>
+
+    <button class="scroll-btn right" onclick="scrollCarousel(1)">&#10095;</button>
+  </div>
+</section>
+
+<section class="testimonial-section">
+  <h2 class="text-center mb-5">What Our Customers Say</h2>
+  <div class="testimonial-container">
+    <div class="testimonial-card">
+      <img src="https://i.pinimg.com/736x/aa/9e/f0/aa9ef022cdae83df1d96baa6fbbeb380.jpg" alt="User 1">
+      <h5>Priya Menon</h5>
+      <p class="title">Food Blogger</p>
+      <p class="review">"The truffles are divine! SMOOR is the only place I trust for premium gifting — elegance and taste in every bite."</p>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://t4.ftcdn.net/jpg/03/80/58/23/360_F_380582318_5lJ52eVLcePphpM4pMHdew3wgopfhQSc.jpg" alt="User 2">
+      <h5>Rohit Verma</h5>
+      <p class="title">Chef & Chocolatier</p>
+      <p class="review">"Exceptional quality. The textures, the packaging, and the flavors — truly world-class."</p>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://t3.ftcdn.net/jpg/06/70/00/42/360_F_670004228_4EFH6zZn8kjVhc5q7FyXuAHn3PtSwpwy.jpg" alt="User 3">
+      <h5>Ananya Rao</h5>
+      <p class="title">Corporate Client</p>
+      <p class="review">"I ordered hampers for my team. Everyone loved it — from branding to taste, SMOOR is unmatched."</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2>CONTACT US</h2>
+      <img src="https://b.zmtcdn.com/data/pictures/7/18374517/8bfda34112093370bdc1eeb7b40a894e.jpg" alt="Luxury Dish">
+       <div class="contact-timings">
+  <h5>Opening Hours</h5>
+  <ul>
+    <li><span>Mon – Fri</span><span>10:00 AM – 10:00 PM</span></li>
+    <li><span>Sat</span><span>09:00 AM – 11:00 PM</span></li>
+    <li><span>Sun</span><span>09:00 AM – 09:00 PM</span></li>
+  </ul>
+</div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-info">
+        <h4>About</h4>
+        <p>About
+
+SMOOR is a premium brand crafting couverture chocolates, desserts, and gourmet experiences. Blending global techniques with Indian roots that celebrate quality and craftsmanship. From handcrafted treats to curated hampers, every creation is made to elevate moments, big or small.</p><br>
+        <h4>GET IN TOUCH</h4>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> info@smoorchocolates.com</p>   
+      </div>
+      <div class="contact-map">
+        <h4>CHECK THE BRANCHES NEAR YOU</h4>
+        <iframe src="https://maps.google.com/maps?q=Indiranagar,%20Bangalore&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                frameborder="0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+  <center><div><p style="color: #f3e8d18f;">© Copyright 2025 Shreya. All Rights Reserved.</p></div></center>
+
+<script>
+  function scrollCarousel(direction) {
+    const carousel = document.getElementById('product-carousel');
+    const scrollAmount = 300; // Pixels per click
+    carousel.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+</script>
+
+</body>
+</html>

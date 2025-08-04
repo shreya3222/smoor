@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - SMOOR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #0d0d0d;
+      color: #f3e8d1;
+    }
+
+    /* ✅ Navbar Styles - Moved outside media query */
+    .custom-navbar {
+      position: fixed;
+      top: 20px;
+      left: 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      padding: 10px 25px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      z-index: 1000;
+    }
+
+    .custom-navbar a {
+      text-decoration: none;
+      color: #f3e8d1;
+      font-weight: 500;
+    }
+
+    .custom-navbar .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .custom-navbar .btn-book {
+      background: #f3e8d1;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 8px;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    .about-left {
+      flex: 1.15;
+      background-image: url('https://b.zmtcdn.com/data/pictures/8/20155558/5b33e1885919b9d441e6586288363522.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+     .about-left-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), #0b0b0b);
+      z-index: 1;
+    }
+    .about-left h1 {
+      position: absolute;
+      left: 30px;
+      font-size: 3.5rem;
+      color: #f3e8d1;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      bottom: 40px;
+      z-index: 2;
+    }
+
+    .about-right {
+      flex: 1;
+      background-color: #111;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .section-title {
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .info-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      flex: 1;
+      min-width: 200px;
+      background: #1b1b1b;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .info-box h5 {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    .info-box p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .exp-section {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #f7f1e6;
+      color: #111;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .exp-text {
+      flex: 1 1 50%;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .exp-image {
+      flex: 1 1 50%;
+    }
+
+    .exp-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .timeline-nav {
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .timeline-nav span {
+      margin: 0 15px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .timeline-nav .active {
+      font-weight: bold;
+      border-bottom: 2px solid #111;
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+      }
+
+      .about-left, .about-right {
+        flex: unset;
+        height: 50vh;
+      }
+    }
+    .exp-image img {
+  width: 100%;
+  height: 450px; /* ✅ Fixed height for consistency */
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .exp-image img {
+    height: 300px;
+  }
+}
+#story-text, #story-image {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+}
+
+.contact-section {
+  background-color: #0f0f0f;
+  color: #f3e8d1;
+  font-family: 'Playfair Display', serif;
+  padding: 80px 40px;
+  padding-bottom: 10px;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.contact-left {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-left h2 {
+  font-size: 3.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.contact-left img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.5);
+}
+
+.contact-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-info h4 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contact-socials a {
+  margin-right: 15px;
+  font-size: 1.2rem;
+  color: #f3e8d1;
+  transition: color 0.3s;
+}
+
+.contact-socials a:hover {
+  color: #e0c187;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 12px;
+}
+
+.contact-timings {
+  margin-top: 30px;
+  text-align: left;
+  background: #1b1b1b;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+
+.contact-timings h5 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #e0c187;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.contact-timings ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-timings li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #f3e8d1;
+}
+
+/* ================== RESPONSIVE DESIGN ================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .custom-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+    left: 10px;
+    top: 10px;
+  }
+
+  .custom-navbar a,
+  .custom-navbar .btn-book {
+    font-size: 0.9rem;
+  }
+
+  .about-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .about-left,
+  .about-right {
+    height: 50vh;
+  }
+
+  .exp-section {
+    flex-direction: column;
+  }
+
+  .exp-text,
+  .exp-image {
+    flex: 1 1 100%;
+    padding: 40px 20px;
+  }
+
+  .exp-image img {
+    height: 300px;
+  }
+
+  .timeline-nav {
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contact-left h2 {
+    font-size: 2.2rem;
+  }
+
+  .contact-timings {
+    max-width: 100%;
+  }
+
+  .about-left h1 {
+    font-size: 2.5rem;
+    bottom: 20px;
+  }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+  .custom-navbar {
+    padding: 10px;
+    gap: 8px;
+    left: 5px;
+    top: 5px;
+  }
+
+  .custom-navbar .brand {
+    font-size: 1.4rem;
+  }
+
+  .custom-navbar .btn-book {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
+
+  .about-left h1 {
+    font-size: 2rem;
+    left: 20px;
+  }
+
+  .exp-text h2,
+  #story-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .exp-text p,
+  #story-text p {
+    font-size: 1rem;
+  }
+
+  .timeline-nav span {
+    margin: 5px;
+    display: inline-block;
+  }
+
+  .contact-left h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-left img {
+    max-width: 100%;
+  }
+
+  .contact-info h4 {
+    font-size: 1.3rem;
+  }
+
+  .contact-info p {
+    font-size: 0.95rem;
+  }
+
+  .contact-map iframe {
+    height: 160px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .info-box h5 {
+    font-size: 1rem;
+  }
+
+  .info-box p {
+    font-size: 0.85rem;
+  }
+
+  .exp-image img {
+    height: 250px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+    
+<!-- ✅ Navbar -->
+<div class="custom-navbar">
+  <div class="brand">
+    <a href="index.html">SMOOR</a>
+  </div>
+  <a href="menu.html">MENU</a>
+  <a href="about.html">ABOUT</a>
+   <a href="#contact" style="color: #f3e8d1;font-family: 'Playfair Display', serif;">CONTACTS</a>
+<a href="reserve.html"><button class="btn-book"  style="background-color: #303030; color:#f3e8d1; font-family:'Playfair Display', serif;">BOOK A TABLE</button></a>
+ </div>
+
+<!-- About Section -->
+<div class="about-container">
+  <div class="about-left">
+    <h1>ABOUT US</h1>
+    <div class="about-left-overlay"></div>
+  </div>
+  <div class="about-right">
+
+   <section style="display: flex; flex-wrap: wrap; background-color: #0f0f0f; color: #f3e8d1;font-family: 'Playfair Display', serif;;">
+     
+    <div style="flex: 1 1 50%; padding: 80px 60px;"> 
+         <h2 style="font-size: 2.5rem; margin-bottom: 25px; color: #e0c187; letter-spacing: 1px;font-family: 'Playfair Display', serif;">
+    SWEET LUXURY, HANDCRAFTED.
+  </h2>
+
+  <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 15px;">
+    SMOOR redefines indulgence with a luxurious range of couverture chocolates and handcrafted desserts crafted to perfection.
+  </p>
+
+  <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 15px;">
+    From melt-in-your-mouth truffles to elegantly curated gift hampers — every bite celebrates sophistication, finesse, and emotion.
+  </p>
+
+  <hr style="border-top: 1px solid #444; margin: 30px 0;">
+
+  <div style="font-size: 0.95rem;">
+    <strong style="color: #e0c187;">Crafted in India. Inspired by passion. Loved globally.</strong>
+  </div> 
+</section>
+  </div>
+</div>
+
+<!-- Timeline -->
+<section id="story-section" class="exp-section">
+  <div class="exp-text" id="story-text">
+    <h2>2025</h2>
+    <p>Opened India’s largest chocolate destination: a <strong>65,000 sq. ft. SMOOR Experience Centre</strong>.</p>
+  </div>
+  <div class="exp-image" id="story-image">
+    <img src="https://www.indiaretailing.com/wp-content/uploads/2024/12/Smoor-store-3-e1733981151313.jpeg" alt="SMOOR Experience Centre">
+  </div>
+</section>
+
+<div class="timeline-nav">
+  <span class="timeline-item" onclick="showStory('2018')">2018</span>
+  <span class="timeline-item" onclick="showStory('2019')">2019</span>
+  <span class="timeline-item" onclick="showStory('2021')">2021</span>
+  <span class="timeline-item" onclick="showStory('2022')">2022</span>
+  <span class="timeline-item" onclick="showStory('2023')">2023</span>
+  <span class="timeline-item" onclick="showStory('2024')">2024</span>
+  <span class="timeline-item active" onclick="showStory('2025')">2025</span>
+</div>
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2>CONTACT US</h2>
+      <img src="https://b.zmtcdn.com/data/pictures/7/18374517/8bfda34112093370bdc1eeb7b40a894e.jpg" alt="Luxury Dish">
+       <div class="contact-timings">
+  <h5>Opening Hours</h5>
+  <ul>
+    <li><span>Mon – Fri</span><span>10:00 AM – 10:00 PM</span></li>
+    <li><span>Sat</span><span>09:00 AM – 11:00 PM</span></li>
+    <li><span>Sun</span><span>09:00 AM – 09:00 PM</span></li>
+  </ul>
+</div>
+
+    </div>
+    <div class="contact-right">
+      <div class="contact-info">
+        <h4>About</h4>
+        <p>About
+
+SMOOR is a premium brand crafting couverture chocolates, desserts, and gourmet experiences. Blending global techniques with Indian roots that celebrate quality and craftsmanship. From handcrafted treats to curated hampers, every creation is made to elevate moments, big or small.</p><br>
+        <h4>GET IN TOUCH</h4>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> info@smoorchocolates.com</p>   
+      </div>
+      <div class="contact-map">
+        <h4>CHECK THE BRANCHES NEAR YOU</h4>
+        <iframe src="https://maps.google.com/maps?q=Indiranagar,%20Bangalore&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                frameborder="0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+  <center><div><p style="color: #f3e8d18f;">© Copyright 2025 Shreya. All Rights Reserved.</p></div></center>
+
+<!-- Timeline Script -->
+<script>
+  const stories = {
+    "2018": {
+      year: "2018",
+      text: "SMOOR was born with a vision to redefine Indian luxury chocolate with international finesse.",
+      image: "https://www.fnp.com/images/pr/x/v20211021175418/smoor-almond-sensation-tin-box_1.jpg"
+    },
+    "2019": {
+      year: "2019",
+      text: "Launched our first café in Bangalore, serving artisanal desserts and curated cocoa experiences.",
+      image: "https://i.pinimg.com/564x/71/19/47/7119474b29f7faee38440432fa0761a5.jpg"
+    },
+    "2021": {
+      year: "2021",
+      text: "Expanded to 5 major Indian cities, making premium chocolates accessible to more connoisseurs.",
+      image: "https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/sites/2/2017/04/04230250/Smoor-Melting_Apple.jpg"
+    },
+    "2022": {
+      year: "2022",
+      text: "Introduced exclusive festive collections and luxury hampers, raising the bar for gourmet gifting.",
+      image: "https://b.zmtcdn.com/data/pictures/9/20219119/cb658fb2e8ca8c54c34f83802b429c23.jpg"
+    },
+    "2023": {
+      year: "2023",
+      text: "Opened our flagship luxury chocolate boutique in Delhi, offering immersive tasting experiences.",
+      image: "https://content.jdmagicbox.com/v2/comp/bangalore/b4/080pxx80.xx80.140704145700.l4b4/catalogue/smoor-malleswaram-west-bangalore-coffee-shops-14ad4yv.jpg"
+    },
+    "2024": {
+      year: "2024",
+      text: "Partnered with global pastry chefs to launch exclusive modern fusion desserts.",
+      image: "https://b.zmtcdn.com/data/pictures/chains/6/19319356/63d49313af0addf373ec9ccbe4506174.jpg"
+    },
+    "2025": {
+      year: "2025",
+      text: "Opened India’s largest chocolate destination: the 65,000 sq. ft. SMOOR Experience Centre.",
+      image: "https://www.indiaretailing.com/wp-content/uploads/2024/12/Smoor-store-3-e1733981151313.jpeg"
+    }
+  };
+
+  function showStory(year) {
+    const story = stories[year];
+    document.getElementById("story-text").innerHTML = `<h2>${story.year}</h2><p>${story.text}</p>`;
+    document.getElementById("story-image").innerHTML = `<img src="${story.image}" alt="Story ${year}">`;
+    document.querySelectorAll(".timeline-item").forEach(el => el.classList.remove("active"));
+    document.querySelector(`.timeline-item[onclick="showStory('${year}')"]`).classList.add("active");
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
